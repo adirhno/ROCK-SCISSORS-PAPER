@@ -102,9 +102,9 @@ document.addEventListener("click", (e) => {
       document.getElementById(
         "result"
       ).innerHTML = ` <div id="playerRes" class="selectionRes">
-        <div id="result1" class='results1'><img src='../images/${playerSelection}2.png' alt=""></div>
+        <div id="result1" class='results1'><img src='./${playerSelection}2.png' alt=""></div>
       </div>
-      <div id="computerRes" class="selectionRes"><div class='results2'><img src='../images/${computerSelection}2.png' alt=""></div></div>
+      <div id="computerRes" class="selectionRes"><div class='results2'><img src='./${computerSelection}2.png' alt=""></div></div>
       `;
     }
 
