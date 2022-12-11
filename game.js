@@ -5,24 +5,8 @@ let playerSelection = "";
 let computer = 0;
 let player = 0;
 let count = 1;
-
-function computerPlay() {
-  let random = Math.floor(Math.random() * 3);
-
-  switch (random) {
-    case 0:
-      return "Rock";
-      break;
-
-    case 1:
-      return "Paper";
-      break;
-
-    case 2:
-      return "Scissors";
-      break;
-  }
-}
+const myArray = ["rock", "paper", "scissors"];
+let rand = myArray[(Math.random() * myArray.length) | 0];
 
 function playRound(playerSelection, computerSelection) {
   let option = 0;
@@ -79,32 +63,29 @@ function playRound(playerSelection, computerSelection) {
       break;
   }
 }
+let names = document.getElementById("names");
+let result = document.getElementById("result");
+let game = document.getElementById("game");
+let playAgain = document.getElementById("playAgain");
 
-document.getElementById("game").innerHTML = "ROUND " + count + "!";
+game.innerHTML = "ROUND " + count + "!";
 
 document.addEventListener("click", (e) => {
-  let playAgain = document.getElementById("playAgain");
-
   let pre = e.target.parentNode;
   if (e.target.id == "playAgain" || pre.className == "playerBtn") {
     if (playAgain) {
       playAgain.remove();
     }
-    document.getElementById("game").innerHTML = "ROUND " + (count + 1) + "!";
-    console.log(pre.value);
+    game.innerHTML = "ROUND " + (count + 1) + "!";
     playerSelection = pre.value;
-    computerSelection = computerPlay().toLowerCase();
+    computerSelection = rand;
     playRound(playerSelection, computerSelection);
     if (e.target.id != "playAgain") {
-      document.getElementById(
-        "names"
-      ).innerHTML = `<span>PLAYER ${player}</span><span>COMPUTER ${computer}</span>`;
-      document.getElementById(
-        "result"
-      ).innerHTML = ` <div id="playerRes" class="selectionRes">
-        <div id="result1" class='results1'><img src='./${playerSelection}2.png' alt=""></div>
+      names.innerHTML = `<span>PLAYER ${player}</span><span>COMPUTER ${computer}</span>`;
+      result.innerHTML = ` <div id="playerRes" class="selectionRes">
+        <div id="result1" class='results1'><img src='./images/${playerSelection}2.png' alt=""></div>
       </div>
-      <div id="computerRes" class="selectionRes"><div class='results2'><img src='./${computerSelection}2.png' alt=""></div></div>
+      <div id="computerRes" class="selectionRes"><div class='results2'><img src='./images/${computerSelection}2.png' alt=""></div></div>
       `;
     }
 
@@ -112,11 +93,11 @@ document.addEventListener("click", (e) => {
 
     if (count == 6) {
       if (player > computer) {
-        document.getElementById("game").innerHTML = "PLAYER IS THE WINNER!";
+        game.innerHTML = "PLAYER IS THE WINNER!";
       } else if (player == computer) {
-        document.getElementById("game").innerHTML = " ITS DRAW!";
+        game.innerHTML = " ITS DRAW!";
       } else {
-        document.getElementById("game").innerHTML = " COMPUTER IS THE WINNER!";
+        game.innerHTML = " COMPUTER IS THE WINNER!";
       }
 
       count = 0;
@@ -124,11 +105,11 @@ document.addEventListener("click", (e) => {
         document.getElementById(
           "game"
         ).innerHTML += `<div><button id="playAgain">PLAY AGAIN</button></div>`;
-        document.getElementById("result").innerHTML = "";
-        document.getElementById("names").innerHTML = "";
-        document.getElementById("playAgain").addEventListener("click", () => {
-          document.getElementById("names").innerHTML = "";
+        result.innerHTML = "";
+        names.innerHTML = "";
 
+        document.getElementById("playAgain").addEventListener("click", () => {
+          names.innerHTML = "";
           player = 0;
           computer = 0;
         });
